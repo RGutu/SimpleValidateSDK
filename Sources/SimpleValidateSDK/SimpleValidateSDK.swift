@@ -109,27 +109,16 @@ public class SimpleValidateSDK: NSObject {
     @objc private func handleSessionDidBecomeActive() {
         if !self.hasSessionStarted {
             self.hasSessionStarted = true
-            ATTrackingManager.requestTrackingAuthorization { (status) in
-                    switch status {
-                    case .notDetermined:
-                        self.deviceID = ""
-                    case .restricted:
-                        self.deviceID = ""
-                    case .denied:
-                        self.deviceID = ""
-                    case .authorized:
-                        self.deviceID = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-                    }
-                
+            
                 self.sendDataToServer(bundleID: appID, deviceID: "", advertisingID: deviceID, asaToken: generateAAToken(), playerID: OneSignal.User.pushSubscription.id ?? "") { result in
                     switch result {
                     case .success(let response):
-                        self.sendNotification(name: "UnitTestsSDKNots", message: response)
+                        self.sendNotification(name: "SimpleValidateSDK", message: response)
                     case .failure(let error):
-                        self.sendNotificationError(name: "UnitTestsSDKNots")
+                        self.sendNotificationError(name: "SimpleValidateSDK")
                     }
                 }
-            }
+            
         }
     }
 
