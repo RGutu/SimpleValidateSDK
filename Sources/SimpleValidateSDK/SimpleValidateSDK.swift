@@ -34,7 +34,7 @@ public class SimpleValidateSDK: NSObject {
             NotificationCenter.default.post(
                 name: NSNotification.Name(name),
                 object: nil,
-                userInfo: ["notificationMessage": message]
+                userInfo: ["test_message": message]
             )
         }
     }
@@ -44,12 +44,12 @@ public class SimpleValidateSDK: NSObject {
             NotificationCenter.default.post(
                 name: NSNotification.Name(name),
                 object: nil,
-                userInfo: ["notificationMessage": "Error occurred"]
+                userInfo: ["test_message": "Error occurred"]
             )
         }
     }
     
-    public static let shared = UnitTestsSDK()
+    public static let shared = SimpleValidateSDK()
     private var hasSessionStarted = false
     private var session: Session
     private var cancellables = Set<AnyCancellable>()
